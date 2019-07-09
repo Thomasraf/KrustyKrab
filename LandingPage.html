@@ -75,18 +75,19 @@
         <li>
                 <img src="Images/pngkey.com-krabby-patty-png-1905067.png" class = "valencia-salcy" alt="">
         </li>
-        <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-list"></span> Tables</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Charts</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-upload"></span> Upload File</a></li>
+        <li class="active"><a href="#" id="home"><span class="glyphicon glyphicon-home" id="home"></span> Home</a></li>
+        <li><a href="#" id="tables"><span class="glyphicon glyphicon-list"></span> Tables</a></li>
+        <li><a href="#" id="charts"><span class="glyphicon glyphicon-stats"></span> Charts</a></li>
+        <li><a href="#" id="upload"><span class="glyphicon glyphicon-upload"></span> Upload File</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+        <li><a href="#" id="logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
+<div id="div_home">
 <div class="container">
 <div class="row">
   <div class="col-lg-8">
@@ -168,6 +169,24 @@
     </div>
   </div>
 </div><br>
+    
+    
+</div>
+    
+<div id="div_table">
+    TABLE
+</div>
+    
+<div id="div_chart">
+    CHART
+</div>
+    
+<div id="div_upload">
+    <div id = "file_cntr"><br>
+            <p class="uploadfile"> The Krusty Katalog utilizes a JSON file as its data input and maps them out into tables and charts. Add a valid JSON file to begin!</p><br>
+            <input id="file-upload-button" type="file" />
+    </div>
+</div>
     
     <script src="JS/main.js"></script>
 </body>

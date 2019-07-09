@@ -4,15 +4,18 @@ window.onload = function(){
     
     $('#home').on('click',function(){
         $('#div_table').show().hide(); 
-        $('#krustyslaves').show(); 
+        $('#div_chart').show().hide(); 
+        $('#div_upload').show().hide(); 
+        
         $('#div_home').show();
+        
         console.log('working');
     });
     
     $('#tables').on('click',function(){
         $('#div_home').show().hide(); 
-        $('#krustyslaves').show().hide(); 
-        $('#div_choose_file').show().hide();
+        $('#div_chart').show().hide();
+        $('#div_upload').show().hide();
         
         $('#div_table').show();
         
@@ -21,19 +24,20 @@ window.onload = function(){
     
     $('#charts').on('click',function(){
         $('#div_home').show().hide(); 
-        $('#krustyslaves').show().hide(); 
         $('#div_table').show().hide();
-        $('#div_choose_file').show().hide();
+        $('#div_upload').show().hide();
+        
+        $('#div_chart').show();
         
         console.log('working');
     });
     
     $('#upload').on('click',function(){
         $('#div_home').show().hide(); 
-        $('#krustyslaves').show().hide(); 
         $('#div_table').show().hide();
+        $('#div_chart').show().hide();
         
-        $('#div_choose_file').show();
+        $('#div_upload').show();
         
         console.log('working');
     });

@@ -9,7 +9,7 @@ function submitForm(e){
 
     if(username.value == "admin" && password.value == "p@ssword"){
         console.log('success')
-        window.location = "mainPage.html"
+        window.location = "LandingPage.html"
     }
     else if(username.value == '' || password.value == ''){
         alert('Please input fields')
