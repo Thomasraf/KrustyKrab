@@ -62,17 +62,17 @@ window.onload = function(){
             if (JSONfile) {
                 var readJSON = new FileReader();
                 readJSON.onload = function(e) { 
-                var JSONcontents = e.target.result;
-                var json = JSON.parse(JSONcontents);
-                traverse(json,JSONtoTableChart);
-                $('#table').show();
-                $('.show_data').show();
-                $('.no_data').show().hide();
+                    var JSONcontents = e.target.result;
+                    var json = JSON.parse(JSONcontents);
+                    traverse(json,JSONtoTableChart);
+                    $('#table').show();
+                    $('.show_data').show();
+                    $('.no_data').show().hide();
                 };
                 readJSON.readAsText(JSONfile);
-                }else { 
+            }else { 
                 console.log("JSON File failed to load");
-                }
+            }
         }
     });
     
@@ -96,10 +96,11 @@ window.onload = function(){
     
     
     function addJSONToTable(key, value) {
-        $('#table tr:last').append('<td>' + key.split("_").join(" ") + '<\/td> <td>' + value + '<\/td>');
+        $('#table tr:last').append('<td>' + value + '<\/td>');
     }
     
     function addTableHeader(x){
+        if(x !== "sales")
         $("#table").append("<tr>" + "<th>" + x.split("_").join(" ") + ": </th>" + "</tr>");          
     }
     
@@ -120,7 +121,8 @@ window.onload = function(){
         new_chart.style.backgroundColor = "white";
         num_charts++;
         chart[num_charts] = new Chart(new_chart,
-        {"type":"bar",
+        {
+        "type":"bar",
         "data":{"labels":[],
         "datasets":[{"label":key,
         "data":[],
@@ -163,7 +165,29 @@ window.onload = function(){
         }
     }
     
-    
+    $("#date_picker").change(function(event){
+        $("tr").show();
+        var count = 0;
+        var chosenDate = document.getElementById("date_picker").value;
+
+        if (chosenDate !== ''){
+            $("td").filter(function() {
+                return $(this).text().indexOf("") !== -1;
+            }).parent().hide();             
+            $("th").filter(function() {
+                return $(this).text().indexOf("") !== -1;
+            }).parent().hide();
+            $("td").filter(function() {
+                if($(this).text().indexOf(chosenDate) !== -1){
+                    count++;
+                    return $(this).html();
+                }                 
+            }).parent().show();      
+        }
+        
+        console.log(count);
+                                         
+    });
     
     
     
