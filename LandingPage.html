@@ -173,18 +173,24 @@
     
 </div>
     
-<div id="div_table">
+<div id="div_table" style="display:none">
     TABLE
+    <p class = "no_data">Looks like you don't have any tables yet! Upload a json file to see some tables!</p>
+            <input id = "date_picker" class = "yes_data" style="display:none" type= "date">
+                <p class = "yes_data" style="display:none">Choose a specific date to filter the table! </p>
+            <table class="table table-bordered table-striped" id="table">
+                <tr></tr>
+            </table>
 </div>
     
-<div id="div_chart">
+<div id="div_chart" style="display:none">
     CHART
 </div>
     
-<div id="div_upload">
+<div id="div_upload" style="display:none">
     <div id = "file_cntr"><br>
             <p class="uploadfile"> The Krusty Katalog utilizes a JSON file as its data input and maps them out into tables and charts. Add a valid JSON file to begin!</p><br>
-            <input id="file-upload-button" type="file" />
+            <input id="file-chooser" type="file" />
     </div>
 </div>
     
