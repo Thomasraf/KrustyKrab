@@ -52,24 +52,24 @@ window.onload = function(){
     
     
     $("#file-chooser").change(function(event){
-        var uploadedFile = event.target.files[0]; 
-        console.log(uploadedFile.type);
-        if(uploadedFile.type != "application/json") { 
+        var JSONfile = event.target.files[0]; 
+        console.log(JSONfile.type);
+        if(JSONfile.type != "application/json") { 
         alert("Please upload a JSON file."); 
         return false;
         }else{
             alert("JSON File uploaded!");   
-            if (uploadedFile) {
-                var readFile = new FileReader();
-                readFile.onload = function(e) { 
-                var contents = e.target.result;
-                var json = JSON.parse(contents);
-                traverse(json,process);
+            if (JSONfile) {
+                var readJSON = new FileReader();
+                readJSON.onload = function(e) { 
+                var JSONcontents = e.target.result;
+                var json = JSON.parse(JSONcontents);
+                traverse(json,JSONtoTableChart);
                 $('#table').show();
                 $('.show_data').show();
                 $('.no_data').show().hide();
                 };
-                readFile.readAsText(uploadedFile);
+                readJSON.readAsText(JSONfile);
                 }else { 
                 console.log("JSON File failed to load");
                 }
@@ -78,46 +78,32 @@ window.onload = function(){
     
     //METHODS
     
-    function traverse(json,process) {
-        for(var i in json) {
-            process.apply(this,[i,json[i]]);  
-            if (json[i] !== null && typeof(json[i])=="object") {
-                traverse(json[i],process);
-            }
+    $("#chart_select").change(function () {
+        var thisVal = this.value;      
+        var chartnum = chart.length - 1;
+        while (num_of_charts >= 0){
+            var datachart = chart[num_of_charts].data;
+            var optionchart = chart[num_of_charts].options;
+            var chartApp = document.getElementsByClassName(chart[num_of_charts].data.datasets[0].label);
+            myChart = new Chart(chartApp, {
+            type: thisVal,
+            data: datachart,
+            options: optionchart
+            });    
+            chartnum--;          
         }
-    }
+    });
     
-    function process(key,value) {
-        if (value == "[object Object]"){
-            addTableHeader(key); 
-            title = key.split("_").join(" ");
-        }
-        else{
-                if (typeof value !== "string" && document.getElementsByClassName(title).length === 0){
-                    create_chart(title);
-                    addData(chart[num_charts], key, value);
-                    $('#table tr:last').remove();
-                }else if(document.getElementsByClassName(title).length !== 0){
-                    addData(chart[num_charts], key, value);
-                }else
-                    addJSONToTable(key, value); 
-        }
-    }
     
     function addJSONToTable(key, value) {
         $('#table tr:last').append('<td>' + key.split("_").join(" ") + '<\/td> <td>' + value + '<\/td>');
     }
     
-    function addTableHeader(key){
-        $("#table").append(
-          "<tr>" +
-            "<th>" + key.split("_").join(" ") + ": </th>" +
-          "</tr>"
-        );
-                   
+    function addTableHeader(x){
+        $("#table").append("<tr>" + "<th>" + x.split("_").join(" ") + ": </th>" + "</tr>");          
     }
     
-    function addData(chart, label, data) {
+    function addChartData(chart, label, data) {
         chart.data.labels.push(label);
         chart.data.datasets.forEach((dataset) => {
             dataset.data.push(data);
@@ -127,13 +113,12 @@ window.onload = function(){
     }
                 
  
-    function create_chart(key){
+    function makeChart(key){
         var new_chart = document.createElement('canvas');
         new_chart.className = key;
         chartApp.appendChild(new_chart);
         new_chart.style.backgroundColor = "white";
         num_charts++;
-        
         chart[num_charts] = new Chart(new_chart,
         {"type":"bar",
         "data":{"labels":[],
@@ -148,31 +133,35 @@ window.onload = function(){
         "scales":{
         "yAxes":[{
         "ticks":{
-        "beginAtZero":true}}]}}});  
-                                            
+        "beginAtZero":true}}]}}});                                 
         new_chart.style.display = "inline-block";
     }
     
-    $("#chart_type").change(function () {
-        var ctype = this.value;
-                    
-        var num_of_charts = chart.length - 1;
-        while (num_of_charts >= 0){
-            var chart_data = chart[num_of_charts].data;
-            var chart_option = chart[num_of_charts].options;
-            var ctx = document.getElementsByClassName(chart[num_of_charts].data.datasets[0].label);
-            myChart = new Chart(ctx, {
-            type: ctype,
-            data: chart_data,
-            options: chart_option
-            });
-                
-            num_of_charts--;
-                       
+    function JSONtoTableChart(key,value) {
+        if (value == "[object Object]"){
+            addTableHeader(key); 
+            title = key.split("_").join(" ");
         }
-    });
+        else{
+                if (typeof value !== "string" && document.getElementsByClassName(title).length === 0){
+                    makeChart(title);
+                    addChartData(chart[num_charts], key, value);
+                    $('#table tr:last').remove();
+                }else if(document.getElementsByClassName(title).length !== 0){
+                    addChartData(chart[num_charts], key, value);
+                }else
+                    addJSONToTable(key, value); 
+        }
+    }
     
-
+    function traverse(json,JSONtoTableChart) {
+        for(var i in json) {
+            JSONtoTableChart.apply(this,[i,json[i]]);  
+            if (json[i] !== null && typeof(json[i])=="object") {
+                traverse(json[i],JSONtoTableChart);
+            }
+        }
+    }
     
     
     
