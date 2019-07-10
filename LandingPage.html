@@ -7,6 +7,16 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script src="http://minime.stephan-brumme.com/files/jquery/jquery-3.1.1.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    
+    
+    
+    
   <style>
     .carousel-inner img {
       width: 100%; /* Set width to 100% */
@@ -176,8 +186,8 @@
 <div id="div_table" style="display:none">
     TABLE
     <p class = "no_data">Looks like you don't have any tables yet! Upload a json file to see some tables!</p>
-            <input id = "date_picker" class = "yes_data" style="display:none" type= "date">
-                <p class = "yes_data" style="display:none">Choose a specific date to filter the table! </p>
+            <input id = "date_picker" class = "show_data" style="display:none" type= "date">
+                <p class = "show_data" style="display:none">Choose a specific date to filter the table! </p>
             <table class="table table-bordered table-striped" id="table">
                 <tr></tr>
             </table>
@@ -185,6 +195,14 @@
     
 <div id="div_chart" style="display:none">
     CHART
+    <p class = "show_data" style="display:none">Choose your Chart type! 
+        <select id="chart_type" autocomplete="off">
+            <option value="bar" selected="selected">Bar</option>
+            <option value="radar">Radar</option>
+            <option value="line">Line</option>
+            <option value="polarArea">Polar Area</option>
+        </select>
+    </p>
 </div>
     
 <div id="div_upload" style="display:none">
