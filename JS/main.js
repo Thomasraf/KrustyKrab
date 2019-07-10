@@ -81,10 +81,10 @@ window.onload = function(){
     $("#chart_select").change(function () {
         var thisVal = this.value;      
         var chartnum = chart.length - 1;
-        while (num_of_charts >= 0){
-            var datachart = chart[num_of_charts].data;
-            var optionchart = chart[num_of_charts].options;
-            var chartApp = document.getElementsByClassName(chart[num_of_charts].data.datasets[0].label);
+        while (chartnum >= 0){
+            var datachart = chart[chartnum].data;
+            var optionchart = chart[chartnum].options;
+            var chartApp = document.getElementsByClassName(chart[chartnum].data.datasets[0].label);
             myChart = new Chart(chartApp, {
             type: thisVal,
             data: datachart,
