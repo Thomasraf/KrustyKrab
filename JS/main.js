@@ -62,17 +62,17 @@ window.onload = function(){
             if (JSONfile) {
                 var readJSON = new FileReader();
                 readJSON.onload = function(e) { 
-                    var JSONcontents = e.target.result;
-                    var json = JSON.parse(JSONcontents);
-                    traverse(json,JSONtoTableChart);
-                    $('#table').show();
-                    $('.show_data').show();
-                    $('.no_data').show().hide();
+                var JSONcontents = e.target.result;
+                var json = JSON.parse(JSONcontents);
+                traverse(json,JSONtoTableChart);
+                $('#table').show();
+                $('.show_data').show();
+                $('.no_data').show().hide();
                 };
                 readJSON.readAsText(JSONfile);
-            }else { 
+                }else { 
                 console.log("JSON File failed to load");
-            }
+                }
         }
     });
     
@@ -121,8 +121,7 @@ window.onload = function(){
         new_chart.style.backgroundColor = "white";
         num_charts++;
         chart[num_charts] = new Chart(new_chart,
-        {
-        "type":"bar",
+        {"type":"bar",
         "data":{"labels":[],
         "datasets":[{"label":key,
         "data":[],
@@ -182,8 +181,13 @@ window.onload = function(){
                     count++;
                     return $(this).html();
                 }                 
-            }).parent().show();      
+            }).parent().show();
+            
+            
+            
         }
+        const customer_count = document.getElementById('customer_count');
+        customer_count.appendChild(document.createTextNode(`There are ${count} people who grabbed a bite in the Krusty Krab`));
         
         console.log(count);
                                          
